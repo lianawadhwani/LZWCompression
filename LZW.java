@@ -11,17 +11,20 @@ import java.io.PrintWriter;
 import java.util.*;
 
 public class LZW {
-    private List<Integer> encodedValues; 
+private static List<Integer> nums= new ArrayList <Integer> (); 
+private static Map<Integer,String> dic = new HashMap<Integer, String> (); 
 	
 	public static List<Integer> compress(String uncompressed) {
         // Build the dictionary.
         int dictSize = 256;
         Map<String,Integer> dictionary = new HashMap<String,Integer>();
-        for (int i = 0; i < 256; i++)//load ascii table 
+        for (int i = 0; i < 256; i++){//load ascii table 
             dictionary.put("" + (char)i, i);
- 
+            dic.put(i, ""+(char)i); 
+        }
+       
         String current = "";
-        encodedValues = new ArrayList<Integer>();
+      List<Integer> encodedValues = new ArrayList<Integer>();
         for (char next : uncompressed.toCharArray()) {
             String combined = current + next;
             if (dictionary.containsKey(combined))//checks if combined is already in dictionary
@@ -37,13 +40,22 @@ public class LZW {
         // Output the ascii code for each character(s) in encodedValues.
         if (!current.equals(""))
             encodedValues.add(dictionary.get(current));
+            nums=encodedValues; 
         return encodedValues;
     }
 
     public String decompress(){
-        for (int i=0; i<encodedValues.size(); i++){
-            
+        int current=0; 
+        int next=0; 
+        String word=""; 
+        for (int i=0; i<nums.size(); i++){
+            current=nums.get(i); 
+            next=nums.get(i+1); 
+            String c=dic.get(current); 
+            String n=dic.get(next); 
+            String+=c+n; 
         }
+    return (word); 
     }
 	
 	
