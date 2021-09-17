@@ -84,7 +84,7 @@ public class LZW {
     }
     
     public static void main(String[] args) throws IOException {
-        String filename = ("/Users/lianawadhwani/Desktop/lzw-file3.txt");
+        String filename = ("lzw-file1.txt");
         BufferedReader br = null;
         String line = "";
         try {
