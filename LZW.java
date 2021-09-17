@@ -56,37 +56,24 @@ public class LZW {
         }
         int size=numbers.size(); 
         for (int i=0; i<size; i++){
-            if (i<numbers.size()-1){
+            if (i<numbers.size()-1){ // makess sure that you wont get out of bounds 
                 current=numbers.get(i); // gets first thing in arraylist
-                //System.out.println(current); 
                 next=numbers.get(i+1); // gets second thing in arraylist
-                //System.out.println(next); 
-                if (next<counter){
+                if (next<counter){ // checks to see that next is already in the dictionary
                     wordC=map.get(current); // converts the numbers into a string 
                     wordN=map.get(next); // same as above but for next 
-                   // System.out.println(wordN.substring(0,1)); 
-                    combined=wordC+wordN.substring(0,1); // comhines current and next's first letter
-                   // System.out.println(combined); 
+                    combined=wordC+wordN.substring(0,1); // combines current and next's first letter
                     map.put(counter,combined); // puts the new combined letters into the dictionary 
                     counter++;// increments counter to fit the new size of map
                 } 
                 else{
-                   // System.out.println(tracker); 
-                    //System.out.println(next); 
-                    wordN=map.get(current); // sets WordN to the last dictionary entry 
-                    //System.out.println(wordN); 
+                    wordN=map.get(current); // sets WordN to the current word 
                     String letter=wordN.substring(0,1); // gets the first letter of the next word 
                     wordN=wordN+letter; // sets wordN to wordN to the first letter of WordN
                     map.put(counter,wordN); // adds to Hashmap
-                   // System.out.println(map.get(tracker)); 
                     counter++; // increments counter
-                   // System.out.println(counter); 
-                    //wordC=map.get(current); 
-                   // combined=wordC+wordN.substring(0,1); 
-                    //map.put(counter,combined); 
                 }
-               
-                //System.out.println(numbers.size()); 
+               ; 
             }
         }
         for (int i=0; i<numbers.size(); i++){
@@ -97,7 +84,7 @@ public class LZW {
     }
     
     public static void main(String[] args) throws IOException {
-        String filename = "lzw-file1.txt";
+        String filename = ("/Users/lianawadhwani/Desktop/lzw-file3.txt");
         BufferedReader br = null;
         String line = "";
         try {
@@ -105,7 +92,7 @@ public class LZW {
            System.out.println("Output:");
             while((line = br.readLine()) != null){//the bufferedreader reads each line, stores it, and passes it onto the "compress" method that performs LZW compression.
                 List<Integer> compressed = compress(line); 
-                System.out.println (compressed); 
+                //System.out.println (compressed); 
                 System.out.println(decompress(compressed)); 
 
             }
