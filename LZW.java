@@ -56,7 +56,7 @@ public class LZW {
         }
         int size=numbers.size(); 
         for (int i=0; i<size; i++){
-            if (i<numbers.size()-2){
+            if (i<numbers.size()-1){
                 current=numbers.get(i); // gets first thing in arraylist
                 //System.out.println(current); 
                 next=numbers.get(i+1); // gets second thing in arraylist
@@ -69,36 +69,29 @@ public class LZW {
                    // System.out.println(combined); 
                     map.put(counter,combined); // puts the new combined letters into the dictionary 
                     counter++;// increments counter to fit the new size of map
-                    word=word+map.get(numbers.get(i)); // this line creates the original word 
-                   // numbers.remove(0); // removes current from the arraylist
-                   // System.out.println( numbers); 
                 } 
                 else{
-                    int tracker= next; // keeps track of the numbers that next originally was 
                    // System.out.println(tracker); 
-                    next=counter-1; // gets the number of the last thing added to the hashmap
                     //System.out.println(next); 
-                    wordN=map.get(next); // sets WordN to the last dictionary entry 
+                    wordN=map.get(current); // sets WordN to the last dictionary entry 
                     //System.out.println(wordN); 
                     String letter=wordN.substring(0,1); // gets the first letter of the next word 
                     wordN=wordN+letter; // sets wordN to wordN to the first letter of WordN
-                    map.put(tracker,wordN); // adds to Hashmap
+                    map.put(counter,wordN); // adds to Hashmap
                    // System.out.println(map.get(tracker)); 
                     counter++; // increments counter
                    // System.out.println(counter); 
                     //wordC=map.get(current); 
                    // combined=wordC+wordN.substring(0,1); 
                     //map.put(counter,combined); 
-                   // counter++; 
-                    i--; 
                 }
                
                 //System.out.println(numbers.size()); 
             }
-            else if (i==numbers.size()-1){
-                System.out.println("help"); 
-                word=word+map.get(numbers.get(i)); 
-            }
+        }
+        for (int i=0; i<numbers.size(); i++){
+            int index=numbers.get(i); 
+           word+=map.get(index); 
         }
         return (word); 
     }
