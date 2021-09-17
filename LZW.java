@@ -55,12 +55,11 @@ public class LZW {
             map.put(i, ""+(char)i); // created dictionary assigning ascii values to the first 255 characters
         }
         int size=numbers.size(); 
-        System.out.println(size); 
         for (int i=0; i<size; i++){
-            if (numbers.size()>1){
-                current=numbers.get(0); // gets first thing in arraylist
+            if (i<numbers.size()-2){
+                current=numbers.get(i); // gets first thing in arraylist
                 //System.out.println(current); 
-                next=numbers.get(1); // gets second thing in arraylist
+                next=numbers.get(i+1); // gets second thing in arraylist
                 //System.out.println(next); 
                 if (next<counter){
                     wordC=map.get(current); // converts the numbers into a string 
@@ -70,10 +69,9 @@ public class LZW {
                    // System.out.println(combined); 
                     map.put(counter,combined); // puts the new combined letters into the dictionary 
                     counter++;// increments counter to fit the new size of map
-                    System.out.println(numbers.get(0)); 
-                    word=word+map.get(numbers.get(0)); // this line creates the original word 
-                    numbers.remove(0); // removes current from the arraylist
-                   // System.out.println(numbers); 
+                    word=word+map.get(numbers.get(i)); // this line creates the original word 
+                   // numbers.remove(0); // removes current from the arraylist
+                   // System.out.println( numbers); 
                 } 
                 else{
                     int tracker= next; // keeps track of the numbers that next originally was 
@@ -92,17 +90,16 @@ public class LZW {
                    // combined=wordC+wordN.substring(0,1); 
                     //map.put(counter,combined); 
                    // counter++; 
+                    i--; 
                 }
                
                 //System.out.println(numbers.size()); 
             }
-            else if (numbers.size()==1){
+            else if (i==numbers.size()-1){
                 System.out.println("help"); 
-                word=word+map.get(numbers.get(0)); 
+                word=word+map.get(numbers.get(i)); 
             }
         }
-      //  System.out.println(numbers.size()); 
-        System.out.println(numbers.size()); 
         return (word); 
     }
     
