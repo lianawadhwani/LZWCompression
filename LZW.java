@@ -55,32 +55,43 @@ public class LZW {
         for (int i=0; i<256; i++){
             map.put(i, ""+(char)i); // created dictionary assigning ascii values to the first 255 characters
         }
-        for (int i=0; i<numbers.size(); i++){
+        int size=numbers.size(); 
+        for (int i=0; i<size; i++){
             if (numbers.size()>1){
-                current=numbers.get(i); 
-                next=numbers.get(i+1); 
-                if (next<map.size()){
+                current=numbers.get(0); 
+                System.out.println(current); 
+                next=numbers.get(1); 
+                System.out.println(next); 
+                if (next<counter){
                     wordC=map.get(current); // converts the numbers into a string 
                     wordN=map.get(next); // same as above but for next 
                     combined=wordC+wordN.substring(0,1); // comhines current and next
                     map.put(counter,combined); // puts the new combined letters into the dictionary 
                     counter++;// increments counter to fit the new size of map
+                    word=word+map.get(numbers.get(0)); // this line creates the original word 
+                    numbers.remove(0); 
+                    System.out.println(numbers); 
                 }
                 else{
                     int tracker= next; // keeps track of the numbers that next originally was 
+                   // System.out.println(tracker); 
                     next=counter-1; 
+                    //System.out.println(next); 
                     wordN=map.get(next); // sets WordN to the last dictionary entry 
+                    System.out.println(wordN); 
                     String letter=wordN.substring(0,1); // gets the first letter of the next word 
                     wordN=wordN+letter; // sets wordN to wordN to the first letter of WordN
                     map.put(tracker,wordN); // adds to Hashmap
-                    wordC=map.get(current); 
-                    combined=wordC+wordN.substring(0,1); 
-                    map.put(counter,combined); 
+                   // System.out.println(map.get(tracker)); 
                     counter++; 
+                   // System.out.println(counter); 
+                    //wordC=map.get(current); 
+                   // combined=wordC+wordN.substring(0,1); 
+                    //map.put(counter,combined); 
+                   // counter++; 
                 }
                
-                word=word+map.get(numbers.get(i)); // this line creates the original word 
-
+                System.out.println(numbers.size()); 
             }
         }
 
